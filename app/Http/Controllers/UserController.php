@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserCreateRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -16,7 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::all();
+        return User::paginate();
     }
 
     /**
@@ -34,13 +36,11 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserCreateRequest $request)
     {
-        $user = User::create([
-            'first_name' => $request->input('first_name'),
-            'last_name' => $request->input('last_name'),
-            'email' => $request->input('email'),
-            'password' => Hash::make($request->input('password')),
+        $user = User::create($request->only('first_name', 'last_name', 'email') +
+        [
+            'password' => Hash::make(1234),
         ]);
 
         return response($user, Response::HTTP_CREATED);
@@ -75,16 +75,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $user_id)
+    public function update(UserUpdateRequest $request, $user_id)
     {
         $user = User::findOrFail($user_id);
 
-        $user->update([
-            'first_name' => $request->input('first_name'),
-            'last_name' => $request->input('last_name'),
-            'email' => $request->input('email'),
-            'password' => Hash::make($request->input('password')),
-        ]);
+        $user->update($request->only('first_name', 'last_name', 'email'));
 
         return response($user, Response::HTTP_ACCEPTED);
     }

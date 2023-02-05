@@ -1,8 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ImageController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 /*
@@ -21,11 +22,11 @@ Route::post('register', [AuthController::class, 'register']);
 
 Route::group(['middleware' => 'auth:api'], function() {
     Route::get('user', [UserController::class, 'user']);
-
     Route::put('user/info', [UserController::class, 'update_info']);
     Route::put('user/password', [UserController::class, 'update_password']);
-
+    Route::post('upload', [ImageController::class, 'upload']);
 
     Route::apiResource('users', UserController::class);
     Route::apiResource('roles', RoleController::class);
+    Route::apiResource('products', ProductController::class);
 });

@@ -1,0 +1,23 @@
+{
+	"DB_PASSWORD": "root",
+	"HOSTNAME": "a5436a17b1f9",
+	"PHP_VERSION": "7.4.33",
+	"PHP_INI_DIR": "/usr/local/etc/php",
+	"GPG_KEYS": "42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312",
+	"REMOTE_CONTAINERS_IPC": "/tmp/vscode-remote-containers-ipc-763d6a9c8b195f6550d834c198fa2c37ce880545.sock",
+	"PHP_LDFLAGS": "-Wl,-O1 -pie",
+	"HOME": "/root",
+	"PHP_SHA256": "924846abf93bc613815c55dd3f5809377813ac62a9ec4eb3778675b82a27b927",
+	"PHPIZE_DEPS": "autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+	"DB_USERNAME": "root",
+	"DB_HOST": "admin_db",
+	"REMOTE_CONTAINERS_SOCKETS": "[\"/tmp/vscode-ssh-auth-763d6a9c8b195f6550d834c198fa2c37ce880545.sock\",\"/tmp/.X11-unix/X0\"]",
+	"PHP_URL": "https://www.php.net/distributions/php-7.4.33.tar.xz",
+	"SHLVL": "1",
+	"PHP_CFLAGS": "-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+	"PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+	"DB_DATABASE": "admin",
+	"PHP_ASC_URL": "https://www.php.net/distributions/php-7.4.33.tar.xz.asc",
+	"PHP_CPPFLAGS": "-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+	"_": "/bin/cat"
+}

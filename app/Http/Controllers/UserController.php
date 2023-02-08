@@ -10,6 +10,7 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -22,17 +23,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate();
-        return UserResource::collection($users);
-    }
+        Gate::authorize('view', 'users');
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create($user_id)
-    {
+        $users = User::paginate();
+
+        return UserResource::collection($users);
     }
 
     /**
@@ -43,6 +38,8 @@ class UserController extends Controller
      */
     public function store(UserCreateRequest $request)
     {
+        Gate::authorize('edit', 'users');
+
         $user = User::create($request->only('first_name', 'last_name', 'email', 'role_id') +
         [
             'password' => Hash::make(1234),
@@ -59,19 +56,10 @@ class UserController extends Controller
      */
     public function show($user_id)
     { 
+        Gate::authorize('view', 'users');
+
         $user = User::findOrFail($user_id);
         return new UserResource($user);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($user_id)
-    {
-        //
     }
 
     /**
@@ -83,6 +71,8 @@ class UserController extends Controller
      */
     public function update(UserUpdateRequest $request, $user_id)
     {
+        Gate::authorize('edit', 'users');
+
         $user = User::findOrFail($user_id);
 
         $user->update($request->only('first_name', 'last_name', 'email', 'role_id'));
@@ -98,13 +88,21 @@ class UserController extends Controller
      */
     public function destroy($user_id)
     {
+        Gate::authorize('edit', 'users');
+
         User::destroy($user_id);
 
         return response(null, Response::HTTP_NO_CONTENT);
     }
 
     public function user() {
-        return Auth::user();
+        $user = Auth::user();
+        
+        return (new UserResource($user))->additional([
+            'data' => [
+                'permissions' => $user->permissions()
+            ]
+        ]);
     }
 
     public function update_info(UpdateInfoRequest $request) {

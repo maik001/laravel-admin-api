@@ -5,21 +5,28 @@ namespace App\Http\Controllers;
 use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Response;
 
 class OrderController extends Controller
 {
     public function index() {
+        Gate::authorize('view', 'orders');
+
         $orders = Order::paginate();
 
         return OrderResource::collection($orders);
     }
 
     public function show($order_id) {
+        Gate::authorize('view', 'orders');
+
         return new OrderResource(Order::findOrFail($order_id));
     }
 
     public function export() {
+        Gate::authorize('view', 'orders');
+
         $headers = [
             "Content-Type" => "text/csv",
             "Content-Disposition" => "attachment; filename=order.csv",

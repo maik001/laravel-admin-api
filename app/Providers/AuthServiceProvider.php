@@ -34,7 +34,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('edit', function (User $user, $model) {
-            $user->has_access("edit_{$model}");
+            return $user->has_access("edit_{$model}");
         });
     }
 }

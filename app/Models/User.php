@@ -55,6 +55,10 @@ class User extends Authenticatable
         'password',
     ];
 
+    protected $attributes = [
+        'role_id' => 3
+    ];
+
     public function role(){
         return $this->belongsTo(Role::class);
     }

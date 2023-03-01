@@ -17,7 +17,7 @@ services:
     environment:
       DB_HOST: admin_db
       DB_DATABASE: admin
-      DB_PASSWORD: root
+      DB_ROOT_PASSWORD: root
     ports:
     - 8000:8000
     volumes:

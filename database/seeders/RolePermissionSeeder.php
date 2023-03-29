@@ -41,7 +41,7 @@ class RolePermissionSeeder extends Seeder
 
         $viewer = Role::whereName('Viewer')->first();
 
-        $viewerRoles = [
+        $viewerPermissions = [
             'view_users',
             'view_roles',
             'view_products',
@@ -49,7 +49,7 @@ class RolePermissionSeeder extends Seeder
         ];
 
         foreach($permissions as $permission) {
-            if(!in_array($permission->name, $viewerRoles)) {
+            if(in_array($permission->name, $viewerPermissions)) {
                 DB::table('role_permission')->insert([
                     'role_id' => $viewer->id,
                     'permission_id' => $permission->id,

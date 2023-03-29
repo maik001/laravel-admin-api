@@ -12,27 +12,24 @@ services:
     build:
       context: ..
       dockerfile: Dockerfile
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
     environment:
-      DB_HOST: admin_db
+      DB_HOST: database
       DB_DATABASE: admin
-      DB_ROOT_PASSWORD: root
+      DB_USERNAME: root
+      DB_ROOT_ASSWORD: root
     ports:
-    - 8000:8000
+    - 8001:8000
     volumes:
     - ..:/app
-    - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
-    - ./php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
-    - ./php/conf.d/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
     depends_on:
       - database
     networks:
       - app
 
   database:
-    container_name: admin_db
+    container_name: admin-db
     image: mysql:5.7.22
+    restart: always
     environment:
       MYSQL_DATABASE: admin
       MYSQL_USER: root

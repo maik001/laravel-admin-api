@@ -8,7 +8,6 @@ use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
@@ -42,7 +41,7 @@ class UserController extends Controller
 
         $user = User::create($request->only('first_name', 'last_name', 'email', 'role_id') +
         [
-            'password' => Hash::make(1234),
+            'password' => Hash::make('password'),
         ]);
 
         return response(new UserResource($user), Response::HTTP_CREATED);

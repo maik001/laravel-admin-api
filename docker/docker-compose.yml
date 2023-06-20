@@ -16,7 +16,7 @@ services:
       DB_HOST: database
       DB_DATABASE: admin
       DB_USERNAME: root
-      DB_ROOT_ASSWORD: root
+      DB_ROOT_PASSWORD: root
     ports:
     - 8001:8000
     volumes:
